@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import poisk from '/poisk.png'
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, onKeyDown }) => {
   const [localQuery, setLocalQuery] = useState('')
   const [category, setCategory] = useState('all')
   const [sort, setSort] = useState('relevance')
@@ -22,12 +22,19 @@ const SearchBar = ({ onSearch }) => {
     onSearch(localQuery, category, sort)
   }
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      onSearch(localQuery, category, sort)
+    }
+  }
+
   return (
     <div>
       <input
         type="text"
         value={localQuery}
         onChange={handleQueryChange}
+        onKeyDown={handleKeyDown}
         placeholder="Search for books"
       />
       <button onClick={handleSearch}><img src={poisk} alt="poisk" /></button>
