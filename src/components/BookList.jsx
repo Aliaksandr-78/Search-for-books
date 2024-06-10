@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types'
 import BookCard from './BookCard'
 
 const BookList = ({ books }) => {
@@ -9,6 +9,22 @@ const BookList = ({ books }) => {
       ))}
     </div>
   )
+}
+
+BookList.propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      volumeInfo: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        authors: PropTypes.arrayOf(PropTypes.string),
+        categories: PropTypes.arrayOf(PropTypes.string),
+        imageLinks: PropTypes.shape({
+          thumbnail: PropTypes.string,
+        }),
+      }).isRequired,
+    })
+  ).isRequired,
 }
 
 export default BookList

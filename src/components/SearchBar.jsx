@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { useState } from 'react'
 import poisk from '/poisk.png'
 
-const SearchBar = ({ onSearch, onKeyDown }) => {
+const SearchBar = ({ onSearch }) => {
   const [localQuery, setLocalQuery] = useState('')
   const [category, setCategory] = useState('all')
   const [sort, setSort] = useState('relevance')
@@ -38,8 +39,9 @@ const SearchBar = ({ onSearch, onKeyDown }) => {
         placeholder="Search for books"
       />
       <button onClick={handleSearch}><img src={poisk} alt="poisk" /></button>
-      <br></br>
-      <p>Category    
+      <br />
+      <p>
+        Category    
         <select value={category} onChange={handleCategoryChange}>
           <option value="all">All</option>
           <option value="art">Art</option>
@@ -57,6 +59,10 @@ const SearchBar = ({ onSearch, onKeyDown }) => {
       </p>
     </div>
   )
+}
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func.isRequired,
 }
 
 export default SearchBar

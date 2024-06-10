@@ -1,5 +1,5 @@
 import '../components/App.css'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import SearchBar from '../components/SearchBar'
 import BookList from '../components/BookList'
 import searchBooks from '../services/googleBooksApi'
