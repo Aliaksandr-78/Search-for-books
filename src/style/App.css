@@ -1,0 +1,259 @@
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  color: #fff;
+  z-index: 10000;
+  background: url("/public/Fon3.jpg") no-repeat;
+  background-size: 100% auto;
+  background-position: top left;
+  background-attachment: fixed;
+  text-align: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+header h1 {
+  font-size: 2rem;
+}
+
+input, button {
+  background-color: #eee;
+  border: none;
+  padding: 10px 15px;
+  margin: 8px 0;
+  font-size: 1rem;
+  line-height: 1.2;
+  box-sizing: border-box; 
+  background-color: #fff;
+}
+
+button {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  background-color: #fff; 
+  border: none; 
+  font-size: 1rem; 
+  line-height: 1.2;
+  box-sizing: border-box;
+}
+
+button img {
+  max-height: 1em; 
+  max-width: 1em; 
+}
+main {
+  padding-top: 200px; 
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+  input, button {
+    height: 20px;
+  }
+  main {
+    padding-top: 150px; 
+  }
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    column-gap: 25px;
+    row-gap: 20px;
+  }
+  .card {
+    width: 200px;
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1rem;
+  }
+  input, button {
+    height: 10px; 
+  }
+  main {
+    padding-top: 120px; 
+  }
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    column-gap: 15px;
+    row-gap: 15px;
+  }
+  .card {
+    width: 150px;
+    min-height: 250px;
+  }
+  .card__price--common {
+    font-size: 14px;
+  }
+  .card__title {
+    font-size: 16px;
+  }
+  .card__add {
+    font-size: 14px;
+    padding: 6px;
+  }
+  .card__ingredients {
+    font-size: 10px;
+  }
+}
+
+
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+  width: 100%;
+  max-width: 100%;
+  justify-content: center;
+  justify-items: center;
+  column-gap: 35px;
+  row-gap: 30px; 
+  margin-bottom: 65px;
+  box-sizing: border-box; 
+}
+.card {
+  width: 250px; 
+  min-height: 350px; 
+  box-shadow: 2px 5px 7px 0 rgb(110, 104, 104);
+  display: flex;
+  flex-direction: column; 
+  border-radius: 5px;
+  transition: 0.2s;
+  position: relative;
+}
+.card:hover {
+  box-shadow: 6px 8px 10px 1px rgb(110, 104, 104);
+}
+.card__top {
+  flex: 0 0 220px;
+  position: relative;
+  overflow: hidden; 
+}
+.card__image {
+  display: block;
+  position: absolute;
+  top: 5px; 
+  left: 5px;
+  width: 100%;
+  height: 100%;
+}
+.card__image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  transition: 0.2s;
+}
+.card__bottom {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto; 
+  padding: 10px;
+  text-align: center;
+  font-family: MyShrift, serif;
+}
+.card__prices {
+  display: block;
+  margin-bottom: 10px;
+  margin-top: auto;
+}
+.card__price::before {
+  content: "от";
+  margin-right: 4px;
+  position: relative;
+}
+.card__price::after {
+  content: "руб.";
+  margin-left: 4px;
+  position: relative;
+}
+.card__price--common {
+  font-weight: bold;
+  font-size: 17px; 
+  color: #343434;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+}
+a {
+  text-decoration: none; 
+}
+.card__title {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 20px; 
+  line-height: 150%;
+  color: #343434;
+}
+.card__title:hover {
+  color: #b70404;
+}
+.card__add {
+  display: block;
+  width: 100%;
+  font-weight: 500;
+  font-size: 18px; 
+  background-color: #ff6633;
+  color: white;
+  padding: 8px; 
+  text-align: center;
+  border: 2px solid #ff6633;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.card__add:hover {
+  border: 2px solid #b70404;
+  background-color: #b70404;
+  color: #fff;
+}
+.card__ingredients {
+  display: block;
+  margin-bottom: 12px; 
+  font-weight: normal;
+  font-size: 12px; 
+  color: #888888;
+}
+
+
+
+.book-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+.book-detail img {
+  max-width: 200px;
+  margin-bottom: 20px;
+}
+.book-detail h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.book-detail p {
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  text-align: center;
+}

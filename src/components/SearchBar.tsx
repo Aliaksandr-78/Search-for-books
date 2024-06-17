@@ -1,34 +1,31 @@
-import PropTypes from 'prop-types'
+import React from 'react'
 import { useState } from 'react'
 import poisk from '/poisk.png'
 
-const SearchBar = ({ onSearch }) => {
+interface SearchBarProps {
+  onSearch: (query: string, category: string, sort: string) => void
+}
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [localQuery, setLocalQuery] = useState('')
   const [category, setCategory] = useState('all')
   const [sort, setSort] = useState('relevance')
-
-  const handleQueryChange = (event) => {
+  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLocalQuery(event.target.value)
   }
-
-  const handleCategoryChange = (event) => {
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(event.target.value)
   }
-
-  const handleSortChange = (event) => {
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSort(event.target.value)
   }
-
   const handleSearch = () => {
     onSearch(localQuery, category, sort)
   }
-
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       onSearch(localQuery, category, sort)
     }
   }
-
   return (
     <div>
       <input
@@ -60,9 +57,4 @@ const SearchBar = ({ onSearch }) => {
     </div>
   )
 }
-
-SearchBar.propTypes = {
-  onSearch: PropTypes.func.isRequired,
-}
-
 export default SearchBar

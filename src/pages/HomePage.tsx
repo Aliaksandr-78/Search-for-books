@@ -1,20 +1,30 @@
-import '../components/App.css'
+import '../style/App.css'
 import { useState } from 'react'
 import SearchBar from '../components/SearchBar'
 import BookList from '../components/BookList'
-import searchBooks from '../services/googleBooksApi'
-
+import searchBooks from '../api/googleBooksApi'
+import React from 'react'
 const RESULTS_PER_PAGE = 30
-
-const HomePage = () => {
-  const [books, setBooks] = useState([])
+interface VolumeInfo {
+  title: string
+  authors?: string[]
+  categories?: string[]
+  imageLinks?: {
+    thumbnail: string
+  }
+}
+interface Book {
+  id: string
+  volumeInfo: VolumeInfo
+}
+const HomePage: React.FC = () => {
+  const [books, setBooks] = useState<Book[]>([])
   const [totalItems, setTotalItems] = useState(0)
   const [startIndex, setStartIndex] = useState(0)
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('all')
   const [sort, setSort] = useState('relevance')
-
-  const handleSearch = async (query, category, sort) => {
+  const handleSearch = async (query: string, category: string, sort: string) => {
     setQuery(query)
     setCategory(category)
     setSort(sort)
@@ -28,7 +38,6 @@ const HomePage = () => {
       console.error('Error searching books:', error)
     }
   }
-
   const handleLoadMore = async () => {
     try {
       const data = await searchBooks(query, category, sort, startIndex)
@@ -38,19 +47,20 @@ const HomePage = () => {
       console.error('Error loading more books:', error)
     }
   }
-    return (
-        <div>
-            <header>
-                <h1>Search for books</h1>
-                <SearchBar onSearch={handleSearch} />
-            </header>
-            <main>
-                <p>{totalItems} books found</p>
-                <BookList books={books} />
-                {startIndex < totalItems && <button onClick={handleLoadMore}>Load more</button>}
-            </main>
+  return (
+    <>
+      <header>
+        <h1>Search for books</h1>
+        <SearchBar onSearch={handleSearch} />
+      </header>
+      <main>
+        <p>{totalItems} books found</p>
+        <div className='cards'>
+          <BookList books={books} />
         </div>
-    )
+        {startIndex < totalItems && <button onClick={handleLoadMore}>Load more</button>}
+      </main>
+    </>
+  )
 }
-
 export default HomePage
