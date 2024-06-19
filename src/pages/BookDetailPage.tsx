@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import { fetchBookDetails } from '../api/detail'
 import '../style/App.css'
 import React from 'react'
-
 interface VolumeInfo {
   title: string
   authors?: string[]
@@ -16,15 +15,24 @@ interface VolumeInfo {
 const BookDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const [book, setBook] = useState<{ volumeInfo: VolumeInfo } | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const getBookDetails = async () => {
-      const bookData = await fetchBookDetails(id!)
-      setBook(bookData)
+      try {
+        const bookData = await fetchBookDetails(id!)
+        setBook(bookData)
+      } catch (error) {
+        console.error('Ошибка при получении данных о книге:', error)
+        setError('не удалось получить данные о книге. Попробуйте позже.')
+      }
     }
     getBookDetails()
   }, [id])
-  if (!book) return <div>Loading...</div>
+
+  if (error) return <div className="error">{error}</div>
+  if (!book) return <div>Загрузка...</div>
+
   const { title, authors, categories, description, imageLinks } = book.volumeInfo
   return (
     <div className="book-detail">

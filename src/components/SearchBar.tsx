@@ -1,7 +1,6 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import Select from './Select'
 import poisk from '/poisk.png'
-
 interface SearchBarProps {
   onSearch: (query: string, category: string, sort: string) => void
 }
@@ -33,26 +32,36 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         value={localQuery}
         onChange={handleQueryChange}
         onKeyDown={handleKeyDown}
-        placeholder="Search for books"
+        placeholder="Поиск книг"
       />
-      <button onClick={handleSearch}><img src={poisk} alt="poisk" /></button>
+      <button onClick={handleSearch}>
+        <img src={poisk} alt="поиск" />
+      </button>
       <br />
       <p>
-        Category    
-        <select value={category} onChange={handleCategoryChange}>
-          <option value="all">All</option>
-          <option value="art">Art</option>
-          <option value="biography">Biography</option>
-          <option value="computers">Computers</option>
-          <option value="history">History</option>
-          <option value="medical">Medical</option>
-          <option value="poetry">Poetry</option>
-        </select>
-        Sorting by
-        <select value={sort} onChange={handleSortChange}>
-          <option value="relevance">Relevance</option>
-          <option value="newest">Newest</option>
-        </select>
+        <Select
+          label="Категория"
+          value={category}
+          options={[
+            { value: 'all', label: 'Все' },
+            { value: 'art', label: 'Искусство' },
+            { value: 'biography', label: 'Биография' },
+            { value: 'computers', label: 'Компьютеры' },
+            { value: 'history', label: 'История' },
+            { value: 'medical', label: 'Медицина' },
+            { value: 'poetry', label: 'Поэзия' }
+          ]}
+          onChange={handleCategoryChange}
+        />
+        <Select
+          label="Сортировка"
+          value={sort}
+          options={[
+            { value: 'relevance', label: 'По релевантности' },
+            { value: 'newest', label: 'По новизне' }
+          ]}
+          onChange={handleSortChange}
+        />
       </p>
     </div>
   )

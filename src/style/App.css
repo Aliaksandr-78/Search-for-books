@@ -3,7 +3,6 @@
   padding: 2rem;
   text-align: center;
 }
-
 header {
   position: fixed;
   width: 100%;
@@ -33,6 +32,7 @@ input, button {
   line-height: 1.2;
   box-sizing: border-box; 
   background-color: #fff;
+  margin-right: 10px
 }
 
 button {
@@ -257,3 +257,27 @@ a {
   margin-bottom: 10px;
   text-align: center;
 }
+
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+
+.select-container {
+  display: inline-block;
+  margin-right: 10px;
+}
+.select-container label {
+  font-weight: bold;
+}
+.select-container select {
+  margin-left: 5px;
+}
+
+
+
+
+
