@@ -1,5 +1,6 @@
-const API_KEY = 'AIzaSyBrhKrBq9JkCHw7zjKsRVLmWAUknKdTD3s'
+const API_KEY = import.meta.env.VITE_API_KEY
 const BASE_URL = 'https://www.googleapis.com/books/v1/volumes'
+
 interface VolumeInfo {
   title: string
   authors?: string[]
@@ -8,14 +9,17 @@ interface VolumeInfo {
     thumbnail: string
   }
 }
+
 interface Book {
   id: string
   volumeInfo: VolumeInfo
 }
+
 interface SearchResult {
   items: Book[]
   totalItems: number
 }
+
 const searchBooks = async (query: string, category: string, orderBy: string, startIndex: number): Promise<SearchResult> => {
   try {
     const categoryFilter = category !== 'all' ? `+subject:${category}` : ''
@@ -25,7 +29,7 @@ const searchBooks = async (query: string, category: string, orderBy: string, sta
       throw new Error('Network response was not ok')
     }
     const data = await response.json()
-    return data;
+    return data
   } catch (error) {
     console.error('Error searching books:', error)
     throw error
