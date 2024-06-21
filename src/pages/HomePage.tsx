@@ -1,10 +1,11 @@
-import '../style/App.css'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import SearchBar from '../components/SearchBar'
 import BookList from '../components/BookList'
 import searchBooks from '../api/googleBooksApi'
-import React from 'react'
+import '../style/App.css'
+
 const RESULTS_PER_PAGE = 30
+
 interface VolumeInfo {
   title: string
   authors?: string[]
@@ -13,10 +14,12 @@ interface VolumeInfo {
     thumbnail: string
   }
 }
+
 interface Book {
   id: string
   volumeInfo: VolumeInfo
 }
+
 const HomePage: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([])
   const [totalItems, setTotalItems] = useState(0)
@@ -25,6 +28,7 @@ const HomePage: React.FC = () => {
   const [category, setCategory] = useState('all')
   const [sort, setSort] = useState('relevance')
   const [error, setError] = useState<string | null>(null)
+
   const handleSearch = async (query: string, category: string, sort: string) => {
     setQuery(query)
     setCategory(category)
@@ -41,6 +45,7 @@ const HomePage: React.FC = () => {
       setError('Не удалось получить данные о книгах. Попробуйте позже.')
     }
   }
+
   const handleLoadMore = async () => {
     setError(null)
     try {
@@ -52,6 +57,7 @@ const HomePage: React.FC = () => {
       setError('не удалось загрузить дополнительные книги. Попробуйте позже.')
     }
   }
+
   return (
     <>
       <header>
@@ -61,12 +67,11 @@ const HomePage: React.FC = () => {
       <main>
         {error && <p className="error">{error}</p>}
         <p>{totalItems} книг найдено</p>
-        <div className='cards'>
-          <BookList books={books} />
-        </div>
+        <BookList books={books} />
         {startIndex < totalItems && <button onClick={handleLoadMore}>Загрузить еще</button>}
       </main>
     </>
   )
 }
+
 export default HomePage

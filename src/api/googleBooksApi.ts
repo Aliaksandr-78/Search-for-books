@@ -1,6 +1,5 @@
 const API_KEY = import.meta.env.VITE_API_KEY
 const BASE_URL = 'https://www.googleapis.com/books/v1/volumes'
-
 interface VolumeInfo {
   title: string
   authors?: string[]
@@ -9,17 +8,14 @@ interface VolumeInfo {
     thumbnail: string
   }
 }
-
 interface Book {
   id: string
   volumeInfo: VolumeInfo
 }
-
 interface SearchResult {
   items: Book[]
   totalItems: number
 }
-
 const searchBooks = async (query: string, category: string, orderBy: string, startIndex: number): Promise<SearchResult> => {
   try {
     const categoryFilter = category !== 'all' ? `+subject:${category}` : ''

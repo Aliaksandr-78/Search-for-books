@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import routes from '../api/routes'
-
 interface VolumeInfo {
   title: string
   authors?: string[]
@@ -10,12 +9,10 @@ interface VolumeInfo {
     thumbnail: string
   }
 }
-
 interface Book {
   id: string
   volumeInfo: VolumeInfo
 }
-
 const BookCard: React.FC<{ book: Book }> = ({ book }) => {
   const navigate = useNavigate()
   const { title, authors, categories, imageLinks } = book.volumeInfo
@@ -23,7 +20,6 @@ const BookCard: React.FC<{ book: Book }> = ({ book }) => {
   const handleClick = () => {
     navigate(routes.bookDetail(book.id))
   }
-
   return (
     <div onClick={handleClick} className="card" style={{ cursor: 'pointer' }}>
       {imageLinks && (
@@ -45,5 +41,4 @@ const BookCard: React.FC<{ book: Book }> = ({ book }) => {
     </div>
   )
 }
-
 export default BookCard
